@@ -2,8 +2,8 @@
 #define TREESE_H
 
 #include <string>
-#include <cstddef> // for size_t
-#include <stdexcept> // for std::out_of_range
+#include <cstddef> 
+#include <stdexcept> 
 #include <iostream>
 
 class Treese {
@@ -13,6 +13,7 @@ private:
 
         Node* left;
         Node* right;
+        size_t height;
      
         size_t length;
         std::string data;
@@ -46,6 +47,7 @@ private:
             size_t leftHeight = left ? left->height : 0;
             size_t rightHeight = right ? right->height : 0;
             height = 1 + std::max(leftHeight, rightHeight);
+        }
     };
 
 
