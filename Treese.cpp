@@ -29,11 +29,11 @@ Treese& Treese::operator=(const Treese& other) {
 
 
 size_t Treese::length() const {
-    return root ? root->totalLength : 0;
+    return root ? root->length : 0;
 }
 
 char Treese::at(size_t index) const {
-    if (!root || index >= root->totalLength) {
+    if (!root || index >= root->length) {
         throw std::out_of_range("Index out of range.");
     }
     return getCharAt(root, index);
