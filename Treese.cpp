@@ -46,7 +46,7 @@ char Treese::at(size_t index) const {
 
 void Treese::print() const {
     print(root);
-    std::cout << std::endl;
+    
 }
 
 
