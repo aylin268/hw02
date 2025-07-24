@@ -71,7 +71,7 @@ void Treese::print(Node* node) const {
 }
 
 
-Treese::Node* Treese::copy(Node* node) {
+Treese::Node* Treese::copy(Node* node) const{
     if (!node) return nullptr;
 
     if (node->leaf) {
@@ -94,3 +94,7 @@ char Treese::getCharAt(Node* node, size_t index) const {
         return getCharAt(node->right, index - leftLength);
     }
 }
+
+char Treese::at(size_t index) const {
+    if (!root || index >= root->length) throw std::out_of_range("Index out of range.");
+    return getCharAt(root, index); \
