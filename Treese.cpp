@@ -67,7 +67,7 @@ void Treese::destroy(Node* node) {
 }
 
 
-Treese::Node* Treese::copy(Node* node) {
+Treese::Node* Treese::copy(Node* node) const {
     if (!node) return nullptr;
     if (node->leaf) {
         return new Node(node->data);
