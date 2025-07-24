@@ -7,32 +7,26 @@
 #include <iostream>
 
 class Treese {
-private:
+protected:
     struct Node {
         bool leaf;
 
         Node* left;
         Node* right;
      
-     
         size_t length;
-        std::string data;
+        std:: string data;
 
-
-
-
-//no children 
-//LN = leaf Node
-//constructor for leaf node 
+        //LN
         Node(const std::string& str ){
             leaf = true ;
             length = str.length();
             data = str;
-            left = nullptr; //empty 
-            right = nullptr; //empty 
+            left = nullptr;
+            right = nullptr;
         }
 
-//costructor for not leaf node
+        // not lef node
         Node(Node* L, Node* R){
             leaf = false;
             length = 0;
@@ -42,18 +36,22 @@ private:
             if (right) length += right->length;
         }
 
-    };
+        void updateHeight() {
+            size_t leftHeight = left ? left->height : 0;
+            size_t rightHeight = right ? right->height : 0;
+            height = 1 + std::max(leftHeight, rightHeight);
+        }
 
+        size_t height = 1; 
+    };
 
     Node* root;
 
-
     void destroy(Node* node);
-    Node* copy(Node* node) const;
-    char at(Node* node, size_t index) const;
-    
+    Node* copy(Node* node);
+    char getCharAt(Node* node, size_t index) const;
+    void print(Node* node) const;
 
-    // your code here
 public:
     Treese();
     Treese(const std::string& initial);
