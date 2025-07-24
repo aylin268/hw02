@@ -7,13 +7,13 @@
 #include <iostream>
 
 class Treese {
-protected:
+private:
     struct Node {
         bool leaf;
 
         Node* left;
         Node* right;
-        size_t height;
+     
      
         size_t length;
         std::string data;
@@ -42,16 +42,9 @@ protected:
             if (right) length += right->length;
         }
 
-
-        void updateHeight() {
-            size_t leftHeight = left ? left->height : 0;
-            size_t rightHeight = right ? right->height : 0;
-            height = 1 + std::max(leftHeight, rightHeight);
-        }
     };
 
 
-private:
     Node* root;
 
 
