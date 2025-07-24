@@ -48,7 +48,7 @@ protected:
     Node* root;
 
     void destroy(Node* node);
-    Node* copy(Node* node);
+    Node* copy(Node* node) const;
     char getCharAt(Node* node, size_t index) const;
     void print(Node* node) const;
 
