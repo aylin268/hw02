@@ -4,6 +4,7 @@
 #include <string>
 #include <cstddef> // for size_t
 #include <stdexcept> // for std::out_of_range
+#include <iostream>
 
 class Treese {
 private:
@@ -12,9 +13,9 @@ private:
 
         Node* left;
         Node* right;
-        size_t height;
+     
         size_t length;
-        std:: string data;
+        std::string data;
 
 
 
@@ -22,10 +23,10 @@ private:
 //no children 
 //LN = leaf Node
 //constructor for leaf node 
-        Node(const std::string& LN ){
+        Node(const std::string& str ){
             leaf = true ;
-            length = LN.length();
-            data = LN;
+            length = str.length();
+            data = str;
             left = nullptr; //empty 
             right = nullptr; //empty 
         }
