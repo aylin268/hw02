@@ -7,7 +7,7 @@
 #include <iostream>
 
 class Treese {
-private:
+protected:
     struct Node {
         bool leaf;
 
@@ -51,14 +51,14 @@ private:
     };
 
 
-
+private:
     Node* root;
 
 
     void destroy(Node* node);
-    Node* copy(Node* node);
+    Node* copy(Node* node) const;
     char at(Node* node, size_t index) const;
-    void print(Node* node) const;
+    
 
     // your code here
 public:
