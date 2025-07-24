@@ -1,23 +1,15 @@
 #include "Treese.h"
 
-
-//constructor
+// Constructors and Destructor
 Treese::Treese() : root(nullptr) {}
 
-
-//deconstructor
-Treese::~Treese() {
-    destroy(root);
-}
-
-Treese::Treese(const std::string& str) {
-    root = new Node(str);
+Treese::Treese(const std::string& initial) {
+    root = new Node(initial);
 }
 
 Treese::Treese(const Treese& other) {
     root = copy(other.root);
 }
-
 
 Treese& Treese::operator=(const Treese& other) {
     if (this != &other) {
@@ -27,14 +19,18 @@ Treese& Treese::operator=(const Treese& other) {
     return *this;
 }
 
+Treese::~Treese() {
+    destroy(root);
+}
 
+// Public methods
 size_t Treese::length() const {
     return root ? root->length : 0;
 }
 
 char Treese::at(size_t index) const {
     if (!root || index >= root->length) {
-        throw std::out_of_range("Index out of range.");
+        throw std::out_of_range("Index out of bounds");
     }
     return getCharAt(root, index);
 }
@@ -50,7 +46,7 @@ Treese Treese::concat(const Treese& other) const {
     return result;
 }
 
-
+// Private helpers
 void Treese::destroy(Node* node) {
     if (!node) return;
     destroy(node->left);
@@ -58,10 +54,28 @@ void Treese::destroy(Node* node) {
     delete node;
 }
 
+Treese::Node* Treese::copy(Node* node) const {
+    if (!node) return nullptr;
+    if (node->leaf) {
+        return new Node(node->data);
+    }
+    return new Node(copy(node->left), copy(node->right));
+}
+
+char Treese::getCharAt(Node* node, size_t index) const {
+    if (!node) throw std::out_of_range("Invalid node");
+    if (node->leaf) {
+        return node->data[index];
+    }
+    if (index < node->left->length) {
+        return getCharAt(node->left, index);
+    } else {
+        return getCharAt(node->right, index - node->left->length);
+    }
+}
 
 void Treese::print(Node* node) const {
     if (!node) return;
-
     if (node->leaf) {
         std::cout << node->data;
     } else {
@@ -69,32 +83,3 @@ void Treese::print(Node* node) const {
         print(node->right);
     }
 }
-
-
-Treese::Node* Treese::copy(Node* node) const{
-    if (!node) return nullptr;
-
-    if (node->leaf) {
-        return new Node(node->data);
-    } else {
-        return new Node(copy(node->left), copy(node->right));
-    }
-}
-
-char Treese::getCharAt(Node* node, size_t index) const {
-    if (node->leaf) {
-        return node->dat[index];
-    }
-
-    size_t leftLength = node->left ? node->left->totalLength : 0;
-
-    if (index < leftLength) {
-        return getCharAt(node->left, index);
-    } else {
-        return getCharAt(node->right, index - leftLength);
-    }
-}
-
-char Treese::at(size_t index) const {
-    if (!root || index >= root->length) throw std::out_of_range("Index out of range.");
-    return getCharAt(root, index); \
