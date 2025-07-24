@@ -52,7 +52,9 @@ void Treese::print() const {
 
 Treese Treese::concat(const Treese& other) const {
     Treese result;
-    result.root = new Node(this->root, other.root);
+    Node* leftCopy = copy(this->root);
+    Node* rightCopy = copy(other.root);
+    result.root = new Node(leftCopy, rightCopy);
     return result;
 }
 
