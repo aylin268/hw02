@@ -62,8 +62,8 @@ void Treese::destroy(Node* node) {
 void Treese::print(Node* node) const {
     if (!node) return;
 
-    if (node->isLeaf) {
-        std::cout << node->text;
+    if (node->leaf) {
+        std::cout << node->data;
     } else {
         print(node->left);
         print(node->right);
@@ -74,16 +74,16 @@ void Treese::print(Node* node) const {
 Treese::Node* Treese::copy(Node* node) {
     if (!node) return nullptr;
 
-    if (node->isLeaf) {
-        return new Node(node->text);
+    if (node->leaf) {
+        return new Node(node->data);
     } else {
         return new Node(copy(node->left), copy(node->right));
     }
 }
 
 char Treese::getCharAt(Node* node, size_t index) const {
-    if (node->isLeaf) {
-        return node->text[index];
+    if (node->leaf) {
+        return node->dat[index];
     }
 
     size_t leftLength = node->left ? node->left->totalLength : 0;
